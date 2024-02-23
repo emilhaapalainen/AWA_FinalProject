@@ -50,6 +50,11 @@ nav .nav-button {
     margin: 12px;
 }
 
+nav .nav-button:disabled {
+    background-color: rgb(59, 56, 9);
+    color: rgb(14, 13, 1);
+}
+
 .overlay {
     width: 100vw;
     height: 100vh;
@@ -71,4 +76,9 @@ nav .nav-button {
     background-color: #fff;
     border-radius: 12px;
     padding: 30px;
+}
+
+.auth-modal .close-button {
+    float: right;
+    font-size: 30px;
 }
