@@ -5,6 +5,12 @@ html, body {
     padding: 0;
 }
 
+h2 {
+    font-size: 24px;
+    font-weight: 1000;
+    color: rgb(0, 0, 0);
+}
+
 * {
     font-family: "Comfortaa", sans-serif;
 }
@@ -81,4 +87,31 @@ nav .nav-button:disabled {
 .auth-modal .close-button {
     float: right;
     font-size: 30px;
+}
+
+.auth-modal form {
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-modal input[type=email],
+.auth-modal input[type=password] {
+    padding: 10px;
+    margin: 8px;
+    font-size: 20px;
+}
+
+.secondary-button {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 14px;
+    background-color: rgb(167, 158, 33);
+    padding: 10px 16px;
+    border-radius: 30px;
+    margin: 10px;
+}
+
+.secondary-button:hover {
+    background-color: #fff;
+    color: rgb(167, 158, 33);
 }
