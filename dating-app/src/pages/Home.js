@@ -5,24 +5,26 @@ import { useState } from "react";
 const Home = () => {
 
     const [showModal, setShowModal] = useState(false);
+    const [isRegister, setIsRegister] = useState(true);
 
     const authToken = false;
 
     const handleClick = () => {
         console.log('Button pressed');
         setShowModal(true);
+        setIsRegister(true);
     }
     return (
         <div className="overlay">
-            <Nav authToken={authToken} setShowModal={setShowModal} showModal={showModal}/>
+            <Nav setShowModal={setShowModal} showModal={showModal} setIsRegister={setIsRegister}/>
             <div className="home">
-                <h1>dateSync</h1>
+                <h1 className="primary-title">dateSync</h1>
                 <button className="primary-button" onClick={handleClick}>
                     {authToken ? 'Signout' : 'Create an Account'}
                 </button>
 
                 {showModal && (
-                    <AuthModal setShowModal={setShowModal} />
+                    <AuthModal setShowModal={setShowModal} isRegister={isRegister}/>
                 )}
             </div>
         </div>

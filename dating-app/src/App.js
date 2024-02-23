@@ -1,3 +1,5 @@
+/* Project follows Ania Kubów's tutorial found at https://www.youtube.com/watch?v=Q70IMS-Qnjk */
+
 import Home from './pages/Home';
 import Welcome from './pages/Welcome';
 import Dashboard from './pages/Dashboard';

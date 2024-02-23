@@ -1,10 +1,13 @@
 import logo from '../images/datesync-logo.png';
 
-const Nav = ({ authToken, setShowModal, showModal }) => {
+const Nav = ({ minimal, setShowModal, showModal, setIsRegister }) => {
 
     const handleClick = () => {
         setShowModal(true);
+        setIsRegister(false);
     }
+
+    const authToken = false;
 
     return (
         <nav>
@@ -13,7 +16,7 @@ const Nav = ({ authToken, setShowModal, showModal }) => {
 
             </div>
 
-            {!authToken && <button 
+            {!authToken && !minimal && <button 
             className="nav-button"
             onClick={handleClick}
             disabled={showModal}

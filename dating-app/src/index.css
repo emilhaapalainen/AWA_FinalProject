@@ -1,8 +1,13 @@
+/* Profile creation form style ideas taken from Ania Kubów
+    https://www.youtube.com/watch?v=Q70IMS-Qnjk
+*/
+
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Roboto&display=swap');
 
 html, body {
     margin: 0;
     padding: 0;
+    text-align: center;
 }
 
 h2 {
@@ -13,6 +18,19 @@ h2 {
 
 * {
     font-family: "Comfortaa", sans-serif;
+}
+
+/* Home */
+
+.home {
+    margin-top: 15vh;
+}
+
+.primary-title {
+    font-size: 90px;
+    font-weight: 1000;
+    color: rgb(0, 0, 0);
+
 }
 
 .primary-button {
@@ -29,9 +47,7 @@ h2 {
     color: rgb(184, 176, 70);
 }
 
-body  {
-    text-align: center;
-}
+/* Nav bar*/
 
 nav {
     width: 100%;
@@ -72,9 +88,14 @@ nav .nav-button:disabled {
     );
 }
 
+/* Authentication form */
+
 .auth-modal {
     position: center;
     top: 185px;
+    left: 0;
+    right: 0;
+    top: 100px;
     margin-left: auto;
     margin-right: auto;
     max-width: 450px;
@@ -114,4 +135,31 @@ nav .nav-button:disabled {
 .secondary-button:hover {
     background-color: #fff;
     color: rgb(167, 158, 33);
+}
+
+/* Welcome/Profile creation form */
+
+.welcome form {
+    display: flex;
+    flex-direction: column;
+}
+
+.welcome form section {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    width: 50%;
+    margin: auto;
+}
+
+.welcome form input {
+    padding: 10px 15px;
+    margin: 6px;
+    font-size: 20px;
+    border: solid rgb(0, 0, 0);
+    border-radius: 80px;
+}
+
+.welcome form .photo-container{
+    width: 100%;
 }

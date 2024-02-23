@@ -1,13 +1,12 @@
 import { useState } from "react";
 
-const AuthModal = ({ setShowModal }) => {
+const AuthModal = ({ setShowModal, isRegister }) => {
 
     const [ email, setEmail ] = useState(null);
     const [ password, setPw ] = useState(null);
     const [ checkpw, setCheckPw ] = useState(null);
     const [ error, setError ] = useState(null);
     
-    const isRegister = true;
 
     const handleClick = () => {
         setShowModal(false);
