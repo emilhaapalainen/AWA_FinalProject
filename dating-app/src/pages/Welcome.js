@@ -3,9 +3,34 @@ import Nav from '../components/Nav';
 
 const Welcome = () => {
 
+    const [formData, setFormData] = useState({
+        user_id: "",
+        first_name: "",
+        dob_day: "",
+        dob_month: "",
+        dob_year: "",
+        gender_identity: "man",
+        gender_interest: "woman",
+        email: "",
+        url: "",
+        about: "",
+        matches: []
+    });
+
     const handleChange = (e) => {
-        console.log(e.target.value);
+        console.log(e);
+        const value = e.target.value;
+        const name = e.target.name;
+        console.log("value:", value, name);
+
+        setFormData((prevState) => ({
+            ...prevState,
+            [name] : value
+        }));
     }
+
+    console.log(formData)
+
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('submitted');
@@ -29,7 +54,7 @@ const Welcome = () => {
                         name='first_name'
                         placeholder='First Name'
                         required={true}
-                        value={""}
+                        value={formData.first_name}
                         onChange={handleChange}
                     />
 
@@ -41,7 +66,7 @@ const Welcome = () => {
                         name='dob_day'
                         placeholder='DD'
                         required={true}
-                        value={""}
+                        value={formData.dob_day}
                         onChange={handleChange}
                     />
                     <input
@@ -50,7 +75,7 @@ const Welcome = () => {
                         name='dob_month'
                         placeholder='MM'
                         required={true}
-                        value={""}
+                        value={formData.dob_month}
                         onChange={handleChange}
                     />
                     <input
@@ -59,7 +84,7 @@ const Welcome = () => {
                         name='dob_year'
                         placeholder='YYYY'
                         required={true}
-                        value={""}
+                        value={formData.dob_year}
                         onChange={handleChange}
                     />
                     </div>
@@ -71,7 +96,7 @@ const Welcome = () => {
                         id="man-gender-identity"
                         name='gender_identity'
                         value="man"
-                        checked={false}
+                        checked={formData.gender_identity === "man"}
                         onChange={handleChange}
                     />
                     <label htmlFor='man-gender-identity'>Man</label>
@@ -80,7 +105,7 @@ const Welcome = () => {
                         id="woman-gender-identity"
                         name='gender_identity'
                         value="woman"
-                        checked={false}
+                        checked={formData.gender_identity === "woman"}
                         onChange={handleChange}
                     />
                     <label htmlFor='woman-gender-identity'>Woman</label>
@@ -93,7 +118,7 @@ const Welcome = () => {
                         id="man-gender-interest"
                         name='gender_interest'
                         value="man"
-                        checked={false}
+                        checked={formData.gender_interest === "man"}
                         onChange={handleChange}
                     />
                     <label htmlFor='man-gender-interest'>Man</label>
@@ -102,7 +127,7 @@ const Welcome = () => {
                         id="woman-gender-interest"
                         name='gender_interest'
                         value="woman"
-                        checked={false}
+                        checked={formData.gender_interest === "woman"}
                         onChange={handleChange}
                     />
                     <label htmlFor='woman-gender-interest'>Woman</label>
@@ -115,7 +140,7 @@ const Welcome = () => {
                         name='about'
                         required={true}
                         placeholder='I like...'
-                        value={""}
+                        value={formData.about}
                         onChange={handleChange}
                     />
 
@@ -130,8 +155,9 @@ const Welcome = () => {
                     required={true}
                     onChange={handleChange}
                 />
-                <div className="photo-container"/>
-
+                <div className="photo-container">
+                    <img src={formData.url} alt="preview"/>
+                </div>
                 </section>
 
             </form>
