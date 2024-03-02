@@ -26,8 +26,7 @@ const AuthModal = ({ setShowModal, isRegister }) => {
             } else {
                 const response = await axios.post(`http://localhost:8000/${isRegister ? 'register' : 'login'}`, { email, password });
 
-                setCookie("Email", response.data.email);
-                setCookie("UserId", response.data.user_id);
+                setCookie("UserID", response.data.user_id);
                 setCookie("AuthToken", response.data.token);
 
                 const success = response.status === 201;

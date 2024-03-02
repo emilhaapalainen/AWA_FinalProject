@@ -42,7 +42,7 @@ app.post('/register', async (req, res) => {
         const result = await users.insertOne(data);
 
         const token = jwt.sign({ user_id: genID }, env.TOKEN_SECRET)
-        res.status(201).json({ token, user_id: genID, email: sanitizedEmail})
+        res.status(201).json({ token, user_id: genID })
     } catch (e) {
         console.error(e)
     }
@@ -53,7 +53,24 @@ app.post('/login', async (req, res) => {
     const client = new MongoClient(uri)
     const { email, password } = req.body
 
-    
+    try {
+        await client.connect()
+        const database = client.db("app-data")
+        const users = database.collection("users")
+
+        const user = await users.findOne({ email })
+
+        if (user && await bcrypt.compare(password, user.hashed_password)) {
+            const token = jwt.sign({ user_id: user.user_id }, env.TOKEN_SECRET)
+            res.status(201).json({ token, user_id: user.user_id})
+        } else {
+            res.status(400).send('Invalid email or password.')
+        }
+
+    } catch (e) {
+        console.error(e)
+    }
+
 })
 
 app.get('/users', async (req, res) => {
@@ -72,5 +89,41 @@ app.get('/users', async (req, res) => {
         await client.close()
     }
 })
+
+app.put('/user', async (req, res) => {
+    const client = new MongoClient(uri)
+    const formData = req.body.formData
+
+
+    try {
+        await client.connect()
+        const database = client.db("app-data")
+        const users = database.collection("users")
+
+        const userQuery = { user_id: formData.user_id }
+
+        const updateData = {
+            $set: {
+                first_name: formData.first_name,
+                dob_day: formData.dob_day,
+                dob_month: formData.dob_month,
+                dob_year: formData.dob_year,
+                gender_identity: formData.gender_identity,
+                gender_interest: formData.gender_interest,
+                url: formData.url,
+                about: formData.about,
+                matches: formData.matches
+            },
+        }
+        
+        const insertedUser = await users.updateOne(userQuery, updateData)
+        res.send(insertedUser)
+    
+    } finally {
+        await client.close()
+    }
+})
+
+
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
