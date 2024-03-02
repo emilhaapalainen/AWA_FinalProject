@@ -5,8 +5,8 @@ const ChatHeader = ({ user }) => {
     const [cookies, setCookie, removeCookie] = useCookies(['user']);
 
     const logout = () => {
-        removeCookie('UserId', cookies.userId)
-        removeCookie('AuthToken', cookies.authToken)
+        removeCookie('UserId', cookies.UserId)
+        removeCookie('AuthToken', cookies.AuthToken)
         window.location.reload()
     }
 

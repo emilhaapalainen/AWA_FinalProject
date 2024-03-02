@@ -9,7 +9,7 @@ const Welcome = () => {
 
     const [ cookies, setCookie, removeCookie ] = useCookies(['user']);
     const [formData, setFormData] = useState({
-        user_id: cookies.UserID,
+        user_id: cookies.UserId,
         first_name: "",
         dob_day: "",
         dob_month: "",
