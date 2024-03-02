@@ -220,7 +220,6 @@ app.get('/messages', async (req, res) => {
     const { userId, correspondingUserId } = req.query
     const client = new MongoClient(uri)
     console.log("userId", userId,"correspondingUserId: ", correspondingUserId)
-    console.log(req.query)
     try {
         await client.connect()
         const database = client.db("app-data")
