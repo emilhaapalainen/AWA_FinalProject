@@ -73,6 +73,27 @@ app.post('/login', async (req, res) => {
 
 })
 
+app.get('/user', async (req, res) => {
+    const client = new MongoClient(uri)
+    const userId = req.query.userId
+    
+
+    try {
+        await client.connect()
+        const database = client.db("app-data")
+        const users = database.collection("users")
+
+        const userQuery = { user_id: userId }
+        const user = await users.findOne(userQuery)
+        res.send(user)
+    } catch (e) {
+        console.error(e)
+    } finally {
+        await client.close()
+    }
+})
+
+
 app.get('/users', async (req, res) => {
     const client = new MongoClient(uri)
 
