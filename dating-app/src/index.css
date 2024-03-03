@@ -291,7 +291,7 @@ nav .nav-button:disabled {
     padding: 12px;
 }
 
-.matches-display .match-card img {
+.matches-display .img-container{
     width: 80px;
     height: 80px;
     border-radius: 50%;

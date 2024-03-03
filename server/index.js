@@ -126,10 +126,7 @@ app.put('/addmatch', async (req, res) => {
 
 app.get('/users', async (req, res) => {
     const client = new MongoClient(uri)
-    console.log(req.query["userId"])
     const userIds = JSON.parse(req.query.userIds)
-    console.log("userIds", userIds)
-
     
     try {
         await client.connect()

@@ -5,10 +5,15 @@ const ChatInput = ({ user, clickedUser, getUserMessages, getMatchedMessages }) =
 
     const [textArea, setTextarea] = useState("");
 
+    //Get the current time for message timestamp
+    const time = new Date();
+    const hours = time.getHours().toString().padStart(2, '0');
+    const minutes = time.getMinutes().toString().padStart(2, '0');
+    const formattedTime = `${hours}:${minutes}`;
 
     const sendMessage = async () => {
         const message = {
-            timestamp: new Date().toISOString(),
+            timestamp: formattedTime,
             from_userId: user?.user_id,
             to_userId: clickedUser?.user_id,
             message: textArea

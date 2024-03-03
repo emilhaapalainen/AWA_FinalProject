@@ -1,13 +1,16 @@
+import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
 const ChatHeader = ({ user }) => {
 
     const [cookies, setCookie, removeCookie] = useCookies(['user']);
+    let navigate = useNavigate();
 
+    // Clear cookies and go back to login page
     const logout = () => {
         removeCookie('UserId', cookies.UserId)
         removeCookie('AuthToken', cookies.AuthToken)
-        window.location.reload()
+        navigate("/")
     }
 
     return (
