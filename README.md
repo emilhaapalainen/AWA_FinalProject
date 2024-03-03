@@ -6,7 +6,7 @@ The project closely follows AniaKubow's "Ultimate Tinder Clone" tutorial video, 
 
 # Installation
 ## Server
-1. Fork the repository
+1. Clone the repository
 2. Navigate to server directory
 3. Install dependencies with ```npm install```
 4. Project uses environmental variables for storing mongoDB URI, create a .env file inside the root of the server directory, add the line ```MONGO_URI = ""``` and add your MongoDB cluster connection string. You need to create a MongoDB Cloud account.
