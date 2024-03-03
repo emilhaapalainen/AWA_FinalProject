@@ -68,7 +68,7 @@ const ChatDisplay = ({ user, clickedUser }) => {
     return (
         <>
         <Chat sortedMessages={sortedMessages} latestMessage={latestMessage}/>
-        <ChatInput/>
+        <ChatInput user={user} clickedUser={clickedUser} getUserMessages={getUserMessages} getMatchedMessages={getMatchedMessages}/>
         </>
     );
 }

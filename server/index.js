@@ -83,11 +83,9 @@ app.post('/login', async (req, res) => {
 
 app.get('/user', async (req, res) => {
     const client = new MongoClient(uri)
-    //console.log(req.query)
     const userId = req.query.userId
     console.log("userId", userId)
     const data = req.query.data
-    //console.log("data", req.query.data)
     
     try {
         await client.connect()
@@ -95,8 +93,6 @@ app.get('/user', async (req, res) => {
         const users = database.collection("users")
         
         const user = await users.findOne({ user_id: userId })
-        //console.log("ID", userId)
-        //console.log("user", user)
         res.send(user)
     } catch (e) {
         console.error(e)
@@ -229,8 +225,23 @@ app.get('/messages', async (req, res) => {
             from_userId: userId, to_userId: correspondingUserId
         }
         const foundMessages = await messages.find(messagesQuery).toArray()
-        console.log("foundMessages", foundMessages)
         res.send(foundMessages)
+    } finally {
+        await client.close()
+    }
+})
+
+app.post('/message', async (req, res) => {
+    const client = new MongoClient(uri)
+    const message = req.body.message
+
+    try {
+        await client.connect()
+        const database = client.db("app-data")
+        const messages = database.collection("messages")
+
+        const result = await messages.insertOne(message)
+        res.send(result)
     } finally {
         await client.close()
     }

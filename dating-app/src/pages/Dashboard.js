@@ -60,7 +60,6 @@ const Dashboard = () => {
 		}
 	}
 
-	console.log("DDDuser", user)
 
     const swiped = (direction, swipedUserId) => {
         if (direction === "right") {
