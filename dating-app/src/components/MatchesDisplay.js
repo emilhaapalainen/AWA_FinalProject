@@ -6,19 +6,14 @@ const MatchesDisplay = ({ matches, setClickedUser }) => {
     const [ matchedProfiles, setMatchedProfiles ] = useState(null)
     const [cookies, setCookie, removeCookie] = useCookies(null);
 
-    console.log("MATCHES", matches)
     const matchedIds = matches.map(({ user_id }) => user_id)
-    console.log("matchedIds", matchedIds)
     const userId = cookies.UserId;
-    
-    
 
     const getMatches = async () => {
         try {
             const response = await axios.get("http://localhost:8000/users", {
                 params: { userIds: JSON.stringify(matchedIds) },
             })
-            console.log("response", response)
             setMatchedProfiles(response.data)
         } catch (error) {
             console.error(error)

@@ -86,7 +86,6 @@ app.post('/login', async (req, res) => {
 app.get('/user', async (req, res) => {
     const client = new MongoClient(uri)
     const userId = req.query.userId
-    console.log("userId", userId)
     const data = req.query.data
     
     try {
@@ -149,7 +148,6 @@ app.get('/users', async (req, res) => {
             
         ]
         const foundUsers = await users.aggregate(pipeline).toArray()
-        console.log("Found users: ", foundUsers)
         res.send(foundUsers)
         
     } finally {
@@ -218,7 +216,7 @@ app.put('/user', async (req, res) => {
 app.get('/messages', async (req, res) => {
     const { userId, correspondingUserId } = req.query
     const client = new MongoClient(uri)
-    console.log("userId", userId,"correspondingUserId: ", correspondingUserId)
+
     try {
         await client.connect()
         const database = client.db("app-data")

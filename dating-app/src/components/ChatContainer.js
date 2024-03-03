@@ -4,11 +4,7 @@ import ChatDisplay from "./ChatDisplay";
 import { useState } from "react";
 
 const ChatContainer = ({ user }) => {
-    console.log("user", user.matches)
-    console.log("matches", user.matches)
     const [ clickedUser, setClickedUser ] = useState(null);
-
-    console.log("clickuser", clickedUser)
 
     return (
         <div className="chat-container">
