@@ -9,23 +9,34 @@ const ChatDisplay = ({ user, clickedUser }) => {
     const clickedUserId = clickedUser?.user_id
 
     const [usersMessages, setUsersMessages] = useState(null)
-    const [clickedUserMessages, setClickedUserMessages] = useState(null)
+    const [MatchedUserMessages, setMatchedUserMessages] = useState(null)
 
-    const getMessages = async (fromId, toId) => {
+    const getUserMessages = async () => {
         try {
             const response = await axios.get("http://localhost:8000/messages", {
-            params: {userId: fromId, correspondingUserId: toId}
+                params: {userId: userId, correspondingUserId: clickedUserId}
         })
-        return response.data
+        setUsersMessages(response.data)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    const getMatchedMessages = async () => {
+        try {
+            const response = await axios.get("http://localhost:8000/messages", {
+                params: {userId: clickedUserId, correspondingUserId: userId}
+        })
+        setMatchedUserMessages(response.data)
         } catch (error) {
             console.error(error)
         }
     }
 
     useEffect(() => {
-        setUsersMessages(getMessages(userId, clickedUserId))
-        setClickedUserMessages(getMessages(clickedUserId, userId))
-    }, [usersMessages, clickedUserMessages])
+        getUserMessages()
+        getMatchedMessages()
+    }, [])
 
     const messages = []
 
@@ -38,9 +49,25 @@ const ChatDisplay = ({ user, clickedUser }) => {
         messages.push(formattedMessage)
     });
 
+    MatchedUserMessages?.forEach(message => {
+        const formattedMessage = {}
+        formattedMessage['name'] = clickedUser?.first_name
+        formattedMessage['img'] = clickedUser?.url
+        formattedMessage['message'] = message?.message
+        formattedMessage['timestamp'] = message?.timestamp
+        messages.push(formattedMessage)
+    });
+
+    const sortedMessages = messages.sort((a, b) => {
+        return new Date(a.timestamp) - new Date(b.timestamp)
+    })
+
+    const latestMessage = sortedMessages?.[sortedMessages.length - 1]
+
+
     return (
         <>
-        <Chat/>
+        <Chat sortedMessages={sortedMessages} latestMessage={latestMessage}/>
         <ChatInput/>
         </>
     );

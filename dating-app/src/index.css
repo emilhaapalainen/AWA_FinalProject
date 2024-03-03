@@ -285,6 +285,18 @@ nav .nav-button:disabled {
 
 
 /* Chat */
+.matches-display .match-card {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+}
+
+.matches-display .match-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
 
 .chat-display {
     padding: 15px;
@@ -293,8 +305,15 @@ nav .nav-button:disabled {
    
 }
 
+.matches-display {
+    padding: 15px;
+    height: 60vh;
+    overflow-y: auto;
+}
+
 .chat-input {
     padding: 15px;
     display: flex;
     flex-direction: column;
 }
+
