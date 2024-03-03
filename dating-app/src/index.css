@@ -205,6 +205,12 @@ nav .nav-button:disabled {
     height: 650px;
 }
 
+.card-container {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
 .swipe {
     position: absolute;
   }
@@ -317,3 +323,67 @@ nav .nav-button:disabled {
     flex-direction: column;
 }
 
+@media (max-width: 600px) {
+    .chat-container {
+        width: 40%;
+        height: 100%;
+    }
+}
+
+@media (min-width: 600px) {
+    .chat-container {
+        width: 70%;
+    }
+}
+
+@media (min-width: 600px) {
+    .chat-input {
+        flex-direction: row;
+    }
+}
+
+@media (min-width: 600px) {
+    .chat-display,
+    .matches-display {
+        height: 70vh;
+    }
+}
+
+@media (max-width: 600px) {
+    .matches-display .match-card .img-container {
+        width: 6vw;
+        height: 6vh;
+    }
+}
+
+@media (max-width: 600px) {
+    .dashboard .card-container .card {
+        width: 50vw;
+        height: 50vh;
+    }
+}
+
+@media (max-width: 600px) {
+    .chat-container-header .profile {
+        width: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .home .primary-title {
+        font-size: 50px;
+        
+    }
+}
+
+@media (max-width: 600px) {
+    .welcome form input {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .dashboard .swipe-container {
+        width: 70%;
+    }
+}
