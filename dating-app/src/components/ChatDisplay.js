@@ -40,6 +40,7 @@ const ChatDisplay = ({ user, clickedUser }) => {
 
     const messages = []
 
+    //Proper formatting of user messages
     usersMessages?.forEach(message => {
         const formattedMessage = {}
         formattedMessage['name'] = user?.first_name
@@ -49,6 +50,7 @@ const ChatDisplay = ({ user, clickedUser }) => {
         messages.push(formattedMessage)
     });
 
+    //Proper formatting of matched user messages
     MatchedUserMessages?.forEach(message => {
         const formattedMessage = {}
         formattedMessage['name'] = clickedUser?.first_name
@@ -58,12 +60,9 @@ const ChatDisplay = ({ user, clickedUser }) => {
         messages.push(formattedMessage)
     });
 
-    const sortedMessages = messages.sort((a, b) => {
-        return new Date(a.timestamp) - new Date(b.timestamp)
-    })
-
+    //Sort messages by time
+    const sortedMessages = messages?.sort((a,b) => a.timestamp.localeCompare(b.timestamp))
     const latestMessage = sortedMessages?.[sortedMessages.length - 1]
-
 
     return (
         <>

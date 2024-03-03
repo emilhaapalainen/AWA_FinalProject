@@ -1,6 +1,5 @@
 const Chat = ({ sortedMessages }) => {
 
-
     return (
         <>
             <div className="chat-display">

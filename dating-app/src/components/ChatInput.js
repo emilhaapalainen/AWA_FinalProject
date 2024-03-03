@@ -9,7 +9,8 @@ const ChatInput = ({ user, clickedUser, getUserMessages, getMatchedMessages }) =
     const time = new Date();
     const hours = time.getHours().toString().padStart(2, '0');
     const minutes = time.getMinutes().toString().padStart(2, '0');
-    const formattedTime = `${hours}:${minutes}`;
+    const seconds = time.getSeconds().toString().padStart(2, '0');
+    const formattedTime = `${hours}:${minutes}:${seconds}`;
 
     const sendMessage = async () => {
         const message = {

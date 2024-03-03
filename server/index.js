@@ -16,6 +16,7 @@ app.get('/', (req, res) => {
     res.send('Hello!')
 })
 
+//Account creationg route
 app.post('/register', async (req, res) => {
     const client = new MongoClient(uri)
     const { email, password } = req.body
@@ -40,7 +41,6 @@ app.post('/register', async (req, res) => {
             user_id: genID,
             email: sanitizedEmail,
             hashed_password: hashPW
-            //matches: []
         }
         const result = await users.insertOne(data);
 
@@ -54,7 +54,7 @@ app.post('/register', async (req, res) => {
 
 })
 
-
+// Login route for already existing accounts
 app.post('/login', async (req, res) => {
     const client = new MongoClient(uri)
     const { email, password } = req.body
@@ -66,6 +66,7 @@ app.post('/login', async (req, res) => {
 
         const user = await users.findOne({ email })
 
+        //Compare input password with hashed password
         if (user && await bcrypt.compare(password, user.hashed_password)) {
             const token = jwt.sign(user, email, {
                 expiresIn: '24h'
@@ -81,6 +82,7 @@ app.post('/login', async (req, res) => {
     
 })
 
+//Fetch user data
 app.get('/user', async (req, res) => {
     const client = new MongoClient(uri)
     const userId = req.query.userId
@@ -101,6 +103,7 @@ app.get('/user', async (req, res) => {
     }
 })
 
+//Add match to user's matches array
 app.put('/addmatch', async (req, res) => {
     const client = new MongoClient(uri)
     const { userId, matchedUserId } = req.body
@@ -124,6 +127,7 @@ app.put('/addmatch', async (req, res) => {
     }
 })
 
+//Fetch matched users
 app.get('/users', async (req, res) => {
     const client = new MongoClient(uri)
     const userIds = JSON.parse(req.query.userIds)
@@ -176,6 +180,7 @@ app.get('/gendered-users', async (req, res) => {
     }
 })
 
+//Update existing user data via welcome page
 app.put('/user', async (req, res) => {
     const client = new MongoClient(uri)
     const formData = req.body.formData
@@ -209,6 +214,7 @@ app.put('/user', async (req, res) => {
     }
 })
 
+//Fetch messages from the database
 app.get('/messages', async (req, res) => {
     const { userId, correspondingUserId } = req.query
     const client = new MongoClient(uri)
@@ -228,6 +234,7 @@ app.get('/messages', async (req, res) => {
     }
 })
 
+//Post new messages to the database
 app.post('/message', async (req, res) => {
     const client = new MongoClient(uri)
     const message = req.body.message
@@ -244,16 +251,13 @@ app.post('/message', async (req, res) => {
     }
 })
 
-
-
+//Test route for query parameters
 app.get('/test', (req, res) => {
     // Respond with the received query parameters
     res.json({
         receivedQueryParams: req.query
     });
 });
-
-
 
 
 

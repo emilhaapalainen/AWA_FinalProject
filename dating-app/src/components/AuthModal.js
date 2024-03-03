@@ -24,8 +24,10 @@ const AuthModal = ({ setShowModal, isRegister }) => {
             if (isRegister && password !== checkpw) {
                 setError('Passwords do not match');
             } else {
+                // If the account is being created, go to register route, otherwise go to login
                 const response = await axios.post(`http://localhost:8000/${isRegister ? 'register' : 'login'}`, { email, password });
 
+                // Saving UserId and AuthToken cookies
                 setCookie("UserId", response.data.user_id);
                 setCookie("AuthToken", response.data.token);
 
